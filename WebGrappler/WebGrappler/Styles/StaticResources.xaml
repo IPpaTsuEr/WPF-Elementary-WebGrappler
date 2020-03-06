@@ -1,0 +1,50 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:cv="clr-namespace:WebGrappler.Converts"
+                    xmlns:str ="clr-namespace:System;assembly=mscorlib"
+                    xmlns:local="clr-namespace:WebGrappler.Styles">
+    <cv:DoNothingMultiConverter x:Key="DoNothingMultiConverter"/>
+    <cv:BoolVisiableConvert x:Key="BoolVisiableConvert"/>
+    <cv:BytesReadableConvert x:Key="BytesReadableConvert"/>
+    <cv:DebugConvert x:Key="DebugConvert"/>
+    <cv:DownloadDateConvert x:Key="DownloadDateConvert"/>
+    <cv:PathIconConvert x:Key="PathIconConvert"/>
+    <cv:ScrollButtonVisiable x:Key="ScrollButtonVisiable"/>
+    <cv:DownloadTimeConvert x:Key="DownloadTimeConvert"/>
+    <cv:TaskProgressConvert x:Key="TaskProgressConvert"/>
+    <cv:ActiveCountConvert x:Key="ActiveCountConvert"/>
+    <cv:CountVisiableConvert x:Key="CountVisiableConvert"/>
+
+    
+    <FontFamily x:Key="IconFont">/WebGrappler;component/Sources/#iconfont</FontFamily>
+    <str:String x:Key="Home">&#xe6b6;</str:String>
+    <str:String x:Key="Fresh">&#xe677;</str:String>
+    <str:String x:Key="Download">&#xe610;</str:String>
+    <str:String x:Key="Goto">&#xe600;</str:String>
+    <str:String x:Key="Lovely">&#xe601;</str:String>
+    <str:String x:Key="LovelySolid">&#xe62d;</str:String>
+    <str:String x:Key="Task">&#xe603;</str:String>
+    <str:String x:Key="Close">&#xe602;</str:String>
+    <str:String x:Key="AddFile">&#xe612;</str:String>
+    <str:String x:Key="Search">&#xe649;</str:String>
+    <str:String x:Key="Copy">&#xeb36;</str:String>
+    <str:String x:Key="Pause">&#xe6d5;</str:String>
+    <str:String x:Key="Resume">&#xe604;</str:String>
+    <str:String x:Key="Stop">&#xe668;</str:String>
+    <str:String x:Key="OpenFloder">&#xe6e6;</str:String>
+    <str:String x:Key="Drop">&#xe659;</str:String>
+    <str:String x:Key="Remove">&#xe626;</str:String>
+    <str:String x:Key="Setting">&#xe676;</str:String>
+
+    <Style x:Key="IconTextBlock" TargetType="TextBlock">
+        <Setter Property="Background" Value="Transparent"/>
+        <Setter Property="FontFamily" Value="{StaticResource IconFont}"/>
+        <Setter Property="Foreground" Value="{DynamicResource Foreground}"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="false">
+                <Setter Property="Foreground" Value="Gray"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+</ResourceDictionary>

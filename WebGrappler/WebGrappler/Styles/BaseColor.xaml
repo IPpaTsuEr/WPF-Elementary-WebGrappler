@@ -1,0 +1,14 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:local="clr-namespace:WebGrappler.Styles">
+    <SolidColorBrush x:Key="Hover" Color="#CC747373"/>
+    <SolidColorBrush x:Key="ActiveHighLight" Color="#FF0A84FF"/>
+    <SolidColorBrush x:Key="Active" Color="#FF323234"/>
+    <SolidColorBrush x:Key="UnActive" Color="#0FFFFFFF" />
+    <SolidColorBrush x:Key="Disable" Color="#FF535355"/>
+    <SolidColorBrush x:Key="Background" Color="#FF202021"/>
+    <SolidColorBrush x:Key="ActiveBackground" Color="#FF323234"/>
+    <SolidColorBrush x:Key="ActiveTabBackground" Color="#FF1B1B1B"/>
+    <SolidColorBrush x:Key="InputBackground" Color="#FF474749"/>
+    <SolidColorBrush x:Key="Foreground" Color="#FFDEDEDE"/>
+</ResourceDictionary>

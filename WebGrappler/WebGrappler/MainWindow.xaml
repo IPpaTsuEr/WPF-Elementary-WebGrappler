@@ -1,0 +1,135 @@
+﻿<ex:ExWindow x:Class="WebGrappler.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:WebGrappler"
+        xmlns:cw="clr-namespace:WebGrappler.ViewModels"
+        xmlns:ex="clr-namespace:ExToolKit;assembly=ExToolKit"
+        xmlns:exh="clr-namespace:ExToolKit.Helpers;assembly=ExToolKit"
+        xmlns:web="clr-namespace:CefSharp.Wpf;assembly=CefSharp.Wpf"
+        mc:Ignorable="d" Foreground="White" Name="_Main_Window" WindowStartupLocation="CenterScreen"
+        Background="{DynamicResource ActiveBackground}"
+             Icon="/Sources/Window.ico" BorderThickness="1"
+        Title="WebGrappler" Height="600" Width="800">
+    
+    <ex:ExWindow.FunctionBar>
+        <StackPanel Orientation="Horizontal" >
+
+            <ex:ExPopBar MaxHeight="600"
+                         ItemsSource="{Binding DataContext.TaskViewList,RelativeSource={RelativeSource AncestorType=Window}}"
+                         ItemTemplate="{StaticResource Used_Task_List_DataStyle}"
+                         ItemContainerStyle="{StaticResource Task_List_ContainerStyle}"
+                         exh:AdornerHelper.DataReference="{Binding DataContext.TaskViewList,RelativeSource={RelativeSource AncestorType=Window}}"
+                         >
+                <exh:AdornerHelper.AdornerElement>
+                    <TextBlock 
+                               Tag="{Binding Path=DataContext.Count,RelativeSource={RelativeSource Mode=Self}}"
+                               IsHitTestVisible="False"
+                               Visibility="{Binding Text,RelativeSource={RelativeSource Mode=Self},Converter={StaticResource CountVisiableConvert}}"
+                               Foreground="{DynamicResource ActiveHighLight}"  Margin="0,2,12,0"
+                               HorizontalAlignment="Right" VerticalAlignment="Top">
+                        <TextBlock.Text>
+                            <MultiBinding Converter="{StaticResource ActiveCountConvert}" ConverterParameter="Task">
+                                <Binding Path="DataContext" RelativeSource="{RelativeSource Mode=Self}"/>
+                                <Binding Path="Tag" RelativeSource="{RelativeSource Mode=Self}"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+
+                </exh:AdornerHelper.AdornerElement>
+
+                <ex:ExPopBar.Header>
+                    <TextBlock ToolTip="解析列表" Style="{StaticResource IconTextBlock}" Text="{StaticResource  Task}"/>
+                </ex:ExPopBar.Header>
+            </ex:ExPopBar>
+            
+            <ex:ExPopBar MaxHeight="600"
+                         ItemTemplate="{StaticResource Download_Item_DataStyle}"
+                         ItemsSource="{Binding DownloadList}"
+                         ItemContainerStyle="{StaticResource Download_ContainerStyle}"
+                         exh:AdornerHelper.DataReference="{Binding DataContext.DownloadList,RelativeSource={RelativeSource AncestorType=Window}}"
+                         >
+                <exh:AdornerHelper.AdornerElement>
+                    <TextBlock 
+                               Tag="{Binding Path=DataContext.Count,RelativeSource={RelativeSource Mode=Self}}"
+                               IsHitTestVisible="False"
+                               Visibility="{Binding Text,RelativeSource={RelativeSource Mode=Self},Converter={StaticResource CountVisiableConvert}}"
+                               Foreground="{DynamicResource ActiveHighLight}"  Margin="0,2,12,0"
+                               HorizontalAlignment="Right" VerticalAlignment="Top">
+                        <TextBlock.Text>
+                            <MultiBinding Converter="{StaticResource ActiveCountConvert}" ConverterParameter="Download">
+                                <Binding Path="DataContext" RelativeSource="{RelativeSource Mode=Self}"/>
+                                <Binding Path="Tag" RelativeSource="{RelativeSource Mode=Self}"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+
+                    </TextBlock>
+                </exh:AdornerHelper.AdornerElement>
+                
+                <ex:ExPopBar.Header>
+                    <TextBlock ToolTip="下载列表" Style="{StaticResource IconTextBlock}" Text="{StaticResource Download}"/>
+                </ex:ExPopBar.Header>
+                
+            </ex:ExPopBar>
+            
+            <Border BorderThickness="0,1" BorderBrush="Transparent" Width="2" Background="#4Fe3e3e3"/>
+            
+            <ex:ExPopBar ToolTip="设置" Width="38">
+                
+                <ex:ExPopBar.Header>
+                    <TextBlock Style="{StaticResource IconTextBlock}" Text="{StaticResource Setting}"/>
+                </ex:ExPopBar.Header>
+
+                <ex:ExPopBarItem Command="{Binding DataContext.MenuControl,RelativeSource={RelativeSource AncestorType=Window}}"  CommandParameter="_OpenRules"
+                                 HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" Icon="      ">
+                    <TextBlock Text=" 编辑解析规则"/>
+                </ex:ExPopBarItem>
+                <ex:ExPopBarItem Command="{Binding DataContext.MenuControl,RelativeSource={RelativeSource AncestorType=Window}}"  CommandParameter="_OpenDownload"
+                                 HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" Icon="      ">
+                    <TextBlock Text=" 打开存储目录"/>
+                </ex:ExPopBarItem>
+                <ex:ExPopBarItem  Command="{Binding DataContext.MenuControl,RelativeSource={RelativeSource AncestorType=Window}}"  CommandParameter="_OpenLog"
+                    HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" Icon="      ">
+                    <TextBlock Text=" 打开日志" />
+                </ex:ExPopBarItem>
+                <ex:ExPopBarItem  Command="{Binding DataContext.MenuControl,RelativeSource={RelativeSource AncestorType=Window}}"  CommandParameter="_OpenAbout"
+                    HorizontalContentAlignment="Left" HorizontalAlignment="Stretch" Icon="      ">
+                    <TextBlock Text=" 关于"/>
+                </ex:ExPopBarItem>
+            </ex:ExPopBar>
+        </StackPanel>
+    </ex:ExWindow.FunctionBar>
+    <Grid>
+        <Grid Margin="0">
+            <ContentPresenter Content="{Binding PreLoad}"/>
+            <ScrollViewer>
+                <ItemsControl ItemsSource="{Binding TaskList,UpdateSourceTrigger=PropertyChanged}"> 
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate DataType="{x:Type cw:ChrominViewModel}">
+                            <Border Height="1080" MaxWidth="400" MinWidth="400">
+                                <ContentPresenter Content="{Binding WebBrowser}"></ContentPresenter>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                    <ItemsControl.Template>
+                        <ControlTemplate TargetType="ItemsControl">
+                            <ScrollViewer VerticalScrollBarVisibility="Auto" Background="AliceBlue">
+                                <ItemsPresenter/>
+                            </ScrollViewer>
+                        </ControlTemplate>
+                    </ItemsControl.Template>
+
+                </ItemsControl>
+            </ScrollViewer>
+        </Grid>
+        
+        <TabControl Name="Main_Grid"
+                    SelectedIndex="0"
+                    DataContext="{Binding Path=SelectedItem,RelativeSource={RelativeSource Mode=Self}}"
+                    ItemsSource="{Binding DataContext.PageList,RelativeSource={RelativeSource AncestorType=Window},UpdateSourceTrigger=PropertyChanged}">
+
+        </TabControl>
+
+    </Grid>
+</ex:ExWindow>

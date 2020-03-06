@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.28307.902
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebGrappler", "WebGrappler\WebGrappler.csproj", "{EF399CB0-50F6-4376-9AFD-DF79DC0F5FC5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Debug|x86 = Debug|x86
+		Release|Any CPU = Release|Any CPU
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EF399CB0-50F6-4376-9AFD-DF79DC0F5FC5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EF399CB0-50F6-4376-9AFD-DF79DC0F5FC5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EF399CB0-50F6-4376-9AFD-DF79DC0F5FC5}.Debug|x86.ActiveCfg = Debug|x86
+		{EF399CB0-50F6-4376-9AFD-DF79DC0F5FC5}.Debug|x86.Build.0 = Debug|x86
+		{EF399CB0-50F6-4376-9AFD-DF79DC0F5FC5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EF399CB0-50F6-4376-9AFD-DF79DC0F5FC5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EF399CB0-50F6-4376-9AFD-DF79DC0F5FC5}.Release|x86.ActiveCfg = Release|x86
+		{EF399CB0-50F6-4376-9AFD-DF79DC0F5FC5}.Release|x86.Build.0 = Release|x86
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {57DD7B86-BF65-4408-B6D1-FFDA2E3207AF}
+	EndGlobalSection
+EndGlobal
