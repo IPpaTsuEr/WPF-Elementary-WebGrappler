@@ -46,7 +46,7 @@
             
             <ex:ExPopBar MaxHeight="600"
                          ItemTemplate="{StaticResource Download_Item_DataStyle}"
-                         ItemsSource="{Binding DownloadList}"
+                         ItemsSource="{Binding DataContext.DownloadList,RelativeSource={RelativeSource AncestorType=Window}}"
                          ItemContainerStyle="{StaticResource Download_ContainerStyle}"
                          exh:AdornerHelper.DataReference="{Binding DataContext.DownloadList,RelativeSource={RelativeSource AncestorType=Window}}"
                          >

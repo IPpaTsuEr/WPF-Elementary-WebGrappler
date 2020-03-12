@@ -6,6 +6,9 @@
                     xmlns:aph="clr-namespace:ExToolKit.Helpers;assembly=ExToolKit"
                     xmlns:ld="clr-namespace:WebGrappler.Helpers"
                     xmlns:local="clr-namespace:WebGrappler.Styles">
+	<Style TargetType="Canvas">
+        <Setter Property="Background" Value="White"/>
+    </Style>
 
     <Style TargetType="Button">
         <Setter Property="Background" Value="Transparent"/>

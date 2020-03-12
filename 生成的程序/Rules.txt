@@ -1,0 +1,107 @@
+{
+ID=豆瓣电影-信息详情解析;
+Action=http[s]?://movie.douban.com/subject/[0-9]+(/|/\?.*)?$;
+DataType=text;
+Data=GetText("#info");
+Title=Dofunc("return $('#content h1').text();");
+AttachName=info;
+}
+{
+ID=豆瓣电影-简介详情解析;
+Action=http[s]?://movie.douban.com/subject/[0-9]+(/|/\?.*)?$;
+DataType=text;
+Data=GetText("#link-report");
+Title=Dofunc("return $('#content h1').text();");
+AttachName=synopsis;
+}
+{
+ID=豆瓣电影-封面解析;
+Action=http[s]?://movie.douban.com/subject/[0-9]+(/|/\?.*)?$;
+DataType=Data;
+Data=GetAttr("#mainpic a img","src");
+Title=Dofunc("return $('#content h1').text();");
+AttachName=cover;
+}
+
+{
+Action=https://ac.qq.com/Comic/comicInfo/id/[0-9]+$;
+BaseOn=腾讯动漫-漫画主页解析;
+}
+
+{
+ID=腾讯动漫-漫画主页解析;
+Action=https://ac.qq.com/Comic/ComicInfo/id/[0-9]+$;
+DataType=url;
+AssignTo=Main;
+Title=Dofunc("return $('.works-intro-title.ui-left strong').text();");
+Data=GroupAttr(".chapter-page-all.works-chapter-list li p span a","href");
+}
+
+{
+Action=https://ac.qq.com/Comic/comicInfo/id/[0-9]+$;
+BaseOn=腾讯动漫-漫画主页封面解析;
+}
+{
+ID=腾讯动漫-漫画主页封面解析;
+Action=https://ac.qq.com/Comic/ComicInfo/id/[0-9]+$;
+DataType=Data;
+Title=GetText(".works-intro-title.ui-left strong");
+Data=GetAttr(".works-cover.ui-left a img:first","src");
+AttachName=cover;
+}
+
+{
+Action=https://ac.qq.com/ComicView/index/id/[0-9]+/cid/[0-9]+$;
+ID=腾讯动漫-漫画页面解析;
+MatchSymbol=true;
+DataReverse=false;
+Title=Dofunc("return $('#comicTitle span:last').text();");
+@@这里一定得取个子元素0才能获取到值，否则就是返回0 ;
+ExDo=LoopKeyDown("#comicContain",
+					Dofunc("return Math.round($('#comicContain')[0].clientHeight/260);"),
+					200);
+Data=GroupAttr("#comicContain li img","src");
+DataType=Data;
+}
+
+
+
+{
+Action=http://www.1kkk.com/ch[0-9]+-[0-9]+/$;
+ID=666;
+DataType=url;
+AssignTo=Inner;
+MatchSymbol=Dofunc("return $('#chapterpager').size()>0;");
+Title=GetText("div[class=title] span:last");
+Data=MakeUrl(
+		Dofunc(" 
+		var grp =$('#chapterpager a:first').attr('href').split('-');
+		return 'http://www.1kkk.com'+grp[0]+'-'+grp[1]+'-p#/';"),
+		1,
+		GetText("#chapterpager a:last")
+		);
+DataReverse=false;
+}
+
+
+{
+Action=http://www.1kkk.com/ch[0-9]+-[0-9]+/$;
+DataType=url;
+AssignTo=Main;
+MatchSymbol=Dofunc("if($('#barChapter'))return true;return false;");
+Title=GetText("div[class=title] span:last");
+Data=GetAttr("#cp_image","src");
+}
+
+{
+Action=http://www.1kkk.com/manhua[0-9]+/$;
+DataType=url;
+AssignTo=Main;
+Title=Dofunc("return $('.info>.title').prop('firstChild').nodeValue;");
+Data=GroupAttr("#chapterlistload ul a","href");
+MatchSymbol=Dofunc("if($('#chapterlistload'))
+						return true; 
+					return false;");
+}
+
+#Data=GroupAttr("#barChapter img","src");
